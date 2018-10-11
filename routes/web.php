@@ -24,7 +24,7 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware(['admin'])->group(function () {
             Route::get('/usuarios','UserController@index')->name('usuarios');
             Route::get('/proyectos','ProjectController@index')->name('proyectos');
-            Route::get('/admin','AdminController@index')->name('admin');
+            Route::get('/admin','AdminController@index')->name('config');
         });
 
     });

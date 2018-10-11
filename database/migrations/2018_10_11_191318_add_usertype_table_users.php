@@ -15,7 +15,7 @@ class AddUsertypeTableUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('user_type')->after('email')->nullable();
+            $table->string('user_type')->after('email')->default('C');
         });
     }
 
