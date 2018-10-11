@@ -22,9 +22,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/reportar', 'ReportController@report')->name('reportar');
 
         Route::middleware(['admin'])->group(function () {
-            Route::get('/usuarios','Controller@')->name('usuarios');
-            Route::get('/proyectos','Controller@')->name('proyectos');
-            Route::get('/admin','Controller@')->name('admin');
+            Route::get('/usuarios','UserController@index')->name('usuarios');
+            Route::get('/proyectos','ProjectController@index')->name('proyectos');
+            Route::get('/admin','AdminController@index')->name('admin');
         });
 
     });
