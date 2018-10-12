@@ -10,7 +10,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-
+                <form action="" class="navbar-form">
+                    <div class="form-group">
+                        <select class="form-control" name="" id="">
+                            <option value="">Proyecto A</option>
+                        </select>
+                    </div>
+                </form>
             </ul>
 
             <!-- Right Side Of Navbar -->

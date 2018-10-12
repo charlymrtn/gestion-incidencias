@@ -28,6 +28,24 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public static $rules = [
+        'name' => 'required|string|min:5|max:30',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|min:3'
+    ];
+
+    public static $messages = [
+        'name.required' => 'el nombre es requerido',
+        'email.required' => 'el correo es requerido',
+        'password.required' => 'la contraseña es requerida',
+        'name.max' => 'el nombre tiene como máximo 30 caracteres',
+        'name.min' => 'el nombre tiene que ser más largo',
+        'email.email' => 'el correo no tiene el formato válido',
+        'email.unique' => 'el correo ya ha sido utilizado',
+        'password.min' => 'la contraseña tiene que se mínimo de 3 caracteres',
+    ];
+
+
     public function getIsAdminAttribute()
     {
         if($this->user_type == 'A') return true;
