@@ -5,11 +5,13 @@
     <div class="card-header">Reportar Incidencia</div>
 
     <div class="card-body">
-        <form action="">
+        @include('common.errors')
+        <form action="{{route('reportar.store')}}" method="POST">
+            @csrf
             <div class="form-group col-md-4">
                 <label for="category_id">Categoría</label>
                 <select name="category_id" id="category_id" class="form-control">
-                    <option value="0">General</option>
+                    <option value="">General</option>
                     @foreach ($categories as $category)
                     <option value="{{$category->id}}">{{$category->name}}</option>
 
@@ -26,11 +28,11 @@
             </div>
             <div class="form-group col-md-8">
                 <label for="title">Título</label>
-                <input type="text" class="form-control" name="title" id="title">
+                <input type="text" class="form-control" name="title" id="title" value="{{old('title')}}">
             </div>
             <div class="form-group col-md-10">
                 <label for="description">Descripción</label>
-                <textarea name="description" id="description" class="form-control"></textarea>
+                <textarea name="description" id="description" class="form-control">{{old('description')}}</textarea>
             </div>
             <div class="form-group col-md-4 mx-auto">
                 <button class="btn btn-primary">Registrar</button>
