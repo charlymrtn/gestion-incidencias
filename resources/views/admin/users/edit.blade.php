@@ -14,29 +14,26 @@
 
     <div class="card-body">
         @include('common.errors')
-        <form action="{{route('usuarios.store')}}" method="POST">
+        <form action="{{route('usuarios.update',$user->id)}}" method="POST">
             @csrf
+            @method('PUT')
             <div class="form-group col-md-5">
                 <label for="email">Correo Electronico</label>
-                <input type="email" class="form-control" name="email" id="email" value="{{old('email')}}">
+                <input type="email" class="form-control" name="email" id="email" value="{{old('email',$user->email)}}">
             </div>
             <div class="form-group col-md-5">
                 <label for="name">Nombre</label>
-                <input type="text" class="form-control" name="name" id="name" value="{{old('name')}}">
+                <input type="text" class="form-control" name="name" id="name" value="{{old('name',$user->name)}}">
             </div>
             <div class="form-group col-md-5">
                 <label for="password">Contraseña</label>
                 <input type="password" class="form-control" name="password" id="password">
             </div>
-            <div class="form-group col-md-5">
-                <label for="password-confirm">Confirmar contraseña</label>
-                <input type="password" class="form-control" name="password-confirm" id="password-confirm">
-            </div>
             <div class="form-group col-md-4">
-                <button class="btn btn-primary"><i class="fas fa-user-plus"></i> Guardar Usuario</button>
+                <button class="btn btn-primary"><i class="fas fa-edit"></i> Guardar Cambios</button>
             </div>
         </form>
-        @include('admin.users.tables.users')
+        @include('admin.users.tables.projects')
 
     </div>
 </div>
