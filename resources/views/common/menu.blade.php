@@ -8,10 +8,12 @@
                     <a href="{{route('home')}}"
                     @if(request()->is('home')) class="nav-link active" @else class="nav-link" @endif>Panel Principal</a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{route('incidencias')}}"
-                    @if(request()->is('incidencias')) class="nav-link active" @else class="nav-link" @endif>Ver incidencias</a>
-                </li>
+                @if (!Auth::user()->is_client)
+                    <li class="nav-item">
+                        <a href="{{route('incidencias')}}"
+                        @if(request()->is('incidencias')) class="nav-link active" @else class="nav-link" @endif>Ver incidencias</a>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <a href="{{route('reportar')}}"
                     @if(request()->is('reportar')) class="nav-link active" @else class="nav-link" @endif>Reportar incidencia</a>

@@ -34,4 +34,11 @@ class User extends Authenticatable
 
         return false;
     }
+
+    public function getIsClientAttribute()
+    {
+        if($this->user_type == 'C') return true;
+
+        return false;
+    }
 }
