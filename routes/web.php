@@ -19,13 +19,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::namespace('Admin')->group(function () {
-        Route::get('/reportar', 'ReportController@report')->name('reportar');
-        Route::post('/reportar', 'ReportController@store')->name('reportar.store');
-        Route::get('/incidencias', 'ReportController@index')->name('incidencias');
+        Route::resource('/incidencias','ReportController')->parameters([
+            'incidencias' => 'incidencia'
+        ]);
 
         Route::middleware(['admin'])->group(function () {
-            Route::get('/usuarios','UserController@index')->name('usuarios');
-            Route::get('/proyectos','ProjectController@index')->name('proyectos');
+            Route::resource('/usuarios','UserController')->parameters([
+                'usuarios' => 'usuario'
+            ])->except('create','show');
+
+            Route::resource('/proyectos','ProjectController')->parameters([
+                'proyectos' => 'proyecto'
+            ]);
+
             Route::get('/admin','AdminController@index')->name('config');
         });
 

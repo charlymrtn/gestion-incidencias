@@ -23,6 +23,9 @@ class CreateIncidentsTable extends Migration
             $table->unsignedInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
 
+            $table->unsignedInteger('project_id')->nullable();
+            $table->foreign('project_id')->references('id')->on('projects');
+
             $table->unsignedInteger('level_id')->nullable();
             $table->foreign('level_id')->references('id')->on('levels');
 

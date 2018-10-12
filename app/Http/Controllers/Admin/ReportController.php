@@ -14,7 +14,7 @@ class ReportController extends Controller
 {
     //
 
-    public function report()
+    public function create()
     {
         $categories = Category::where('project_id',1)->get();
         return view('admin.report',compact('categories'));
