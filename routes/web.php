@@ -21,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
     Route::namespace('Admin')->group(function () {
         Route::get('/reportar', 'ReportController@report')->name('reportar');
         Route::post('/reportar', 'ReportController@store')->name('reportar.store');
+        Route::get('/incidencias', 'ReportController@index')->name('incidencias');
 
         Route::middleware(['admin'])->group(function () {
             Route::get('/usuarios','UserController@index')->name('usuarios');

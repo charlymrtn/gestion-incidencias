@@ -20,6 +20,13 @@ class ReportController extends Controller
         return view('admin.report',compact('categories'));
     }
 
+    public function index()
+    {
+        $bugs = Bug::all();
+
+        return $bugs;
+    }
+
     public function store(Request $request)
     {
 

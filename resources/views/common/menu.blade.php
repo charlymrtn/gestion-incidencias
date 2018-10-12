@@ -2,19 +2,34 @@
     <div class="card-header">Menú</div>
 
     <div class="card-body">
-        <div class="nav nav-pills nav-stacked">
+        <ul class="nav nav-pills nav-stacked">
             @if (Auth::check())
-                <li><a href="{{route('home')}}" class="list-group-item">Panel Principal</a></li>
-                <li><a href="#" class="list-group-item">Ver incidencias</a></li>
-                <li><a href="{{route('reportar')}}" class="list-group-item">Reportar incidencia</a></li>
-                @if (Auth::user()->user_type == 'A')
-                    <li role="presentation" class="list-group-item dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administración
+                <li class="nav-item">
+                    <a href="{{route('home')}}"
+                    @if(request()->is('home')) class="nav-link active" @else class="nav-link" @endif>Panel Principal</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('incidencias')}}"
+                    @if(request()->is('incidencias')) class="nav-link active" @else class="nav-link" @endif>Ver incidencias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('reportar')}}"
+                    @if(request()->is('reportar')) class="nav-link active" @else class="nav-link" @endif>Reportar incidencia</a>
+                </li>
+                @if (Auth::user()->is_admin)
+                    <li role="presentation" class="nav- item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown">Administración
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{route('usuarios')}}">Usuarios</a></li>
-                            <li><a href="{{route('proyectos')}}">Proyectos</a></li>
-                            <li><a href="{{route('config')}}">Configuración</a></li>
+                            <li class="nav-item">
+                                <a href="{{route('usuarios')}}" class="nav-link">Usuarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('proyectos')}}" class="nav-link">Proyectos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('config')}}" class="nav-link">Configuración</a>
+                            </li>
                         </ul>
                     </li>
                 @endif
@@ -23,8 +38,7 @@
                 <li><a href="#" class="list-group-item">Instrucciones</a></li>
                 <li><a href="#" class="list-group-item">Créditos</a></li>
             @endif
-
-        </div>
+        </ul>
     </div>
 </div>
 
