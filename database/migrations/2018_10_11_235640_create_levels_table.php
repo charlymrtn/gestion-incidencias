@@ -15,6 +15,12 @@ class CreateLevelsTable extends Migration
     {
         Schema::create('levels', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->string('name');
+
+            $table->unsignedInteger('project_id');
+            $table->foreign('project_id')->references('id')->on('projects');
+
             $table->timestamps();
         });
     }

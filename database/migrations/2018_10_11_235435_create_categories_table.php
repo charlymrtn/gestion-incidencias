@@ -19,6 +19,9 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('description');
 
+            $table->unsignedInteger('project_id');
+            $table->foreign('project_id')->references('id')->on('projects');
+
             $table->timestamps();
         });
     }
