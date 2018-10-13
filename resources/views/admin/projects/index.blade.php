@@ -10,35 +10,35 @@
 
 @section('content')
 <div class="card w-80">
-    <div class="card-header">Usuarios</div>
+    <div class="card-header">Proyectos</div>
 
     <div class="card-body">
         @include('common.errors')
         @include('common.notifications')
-        <form action="{{route('usuarios.store')}}" method="POST">
+        <form action="{{route('proyectos.store')}}" method="POST">
             @csrf
-            <div class="form-group col-md-5 ml-auto">
-                <label for="email">Correo Electronico</label>
-                <input type="email" class="form-control" name="email" id="email" value="{{old('email')}}">
-            </div>
             <div class="form-group col-md-5 ml-auto">
                 <label for="name">Nombre</label>
                 <input type="text" class="form-control" name="name" id="name" value="{{old('name')}}">
             </div>
             <div class="form-group col-md-5 ml-auto">
-                <label for="password">Contraseña</label>
-                <input type="text" class="form-control" name="password" id="password" value="{{old('password',str_random(6))}}">
+                <label for="description">Descripción</label>
+                <textarea name="description" id="description" cols="34">{{old('description')}}</textarea>
+            </div>
+            <div class="form-group col-md-5 ml-auto">
+                <label for="start">Fecha de Inicio</label>
+                <input type="date" class="form-control" name="start" id="start" value="{{old('start',date('Y-m-d'))}}">
             </div>
             <div class="form-group col-md-4 ml-auto">
-                <button class="btn btn-primary btn-sm"><i class="fas fa-user-plus"></i> Guardar Usuario</button>
+                <button class="btn btn-primary btn-sm"><i class="fas fa-user-plus"></i> Guardar Proyecto</button>
             </div>
         </form>
-        @include('admin.tables.users')
+        @include('admin.tables.projects')
     </div>
 </div>
 
-@foreach ($usuarios as $user)
-    @include('modals.delete-user')
+@foreach ($projects as $project)
+    @include('modals.delete-project')
 @endforeach
 
 @endsection
