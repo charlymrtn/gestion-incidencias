@@ -12,7 +12,7 @@ class UserController extends Controller
     //
     public function index()
     {
-        $usuarios = User::all();
+        $usuarios = User::where('user_type','<>','A')->get();
         return view('admin.users.index',compact('usuarios'));
     }
 
@@ -40,6 +40,25 @@ class UserController extends Controller
 
     public function update(Request $request, User $usuario)
     {
+        $rules = [
+            'name' => 'required|max:30',
+            'password' => 'nullable|min:3'
+        ];
+
+        $messages = [
+            'name.required' => 'el nombre es requerido.',
+            'name.max' => 'se superó el máximo de caracteres.',
+            'password.min' => 'la contraseña debe ser mas larga.'
+        ];
+
+        $this->validate($request,$rules,$messages);
+
+        $usuario->name = $request->name;
+        if ($request->password) $usuario->password = bcrypt($request->password);
+
+        $usuario->save();
+
+        return redirect()->route('usuarios.index')->with('success','el usuario se he modificado correctamente.');
 
     }
 
@@ -47,7 +66,7 @@ class UserController extends Controller
     {
         try{
             $usuario->delete();
-            return back()->with('success','usuario eliminado correctamente');
+            return back()->with('success','usuario eliminado correctamente.');
         }catch(\Exception $e){
             return back()->with('error','error al eliminar al usuario.');
         }

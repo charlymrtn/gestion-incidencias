@@ -4,6 +4,7 @@
             <tr>
                 <th>Correo</th>
                 <th>Nombre</th>
+                <th>Tipo</th>
                 <th>Opciones</th>
             </tr>
         </thead>
@@ -12,17 +13,15 @@
                 <tr>
                     <td>{{$user->email}}</td>
                     <td>{{$user->name}}</td>
+                    <td>{{$user->tipo}}</td>
                     <td>
-                        <form method="POST" action="{{route('usuarios.destroy',$user->id)}}">
-                            @csrf
-                            @method('DELETE')
-                            <a class="btn btn-primary btn-sm" title="Editar" href="{{route('usuarios.edit',$user->id)}}">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <button type="submit" class="btn btn-danger btn-sm" title="Dar de baja">
-                                <i class="fas fa-user-times"></i>
-                            </button>
-                        </form>
+                        <a class="btn btn-primary btn-sm" title="Editar" href="{{route('usuarios.edit',$user->id)}}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteUser{{$user->id}}">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </td>
                 </tr>
             @endforeach

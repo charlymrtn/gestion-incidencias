@@ -27,13 +27,13 @@
             </div>
             <div class="form-group col-md-5 ml-auto">
                 <label for="password">Contraseña</label>
-                <input type="password" class="form-control" name="password" id="password" value="{{old('password',str_random(6))}}">
+                <input type="text" class="form-control" name="password" id="password" value="{{old('password',str_random(6))}}">
             </div>
             <div class="form-group col-md-4 ml-auto">
                 <button class="btn btn-primary"><i class="fas fa-user-plus"></i> Guardar Usuario</button>
             </div>
         </form>
-        @include('admin.users.tables.users-2')
+        @include('admin.users.tables.users')
     </div>
 </div>
 

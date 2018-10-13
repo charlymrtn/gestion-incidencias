@@ -23,6 +23,7 @@ class CreateCategoriesTable extends Migration
             $table->foreign('project_id')->references('id')->on('projects');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -36,6 +36,7 @@ class CreateIncidentsTable extends Migration
             $table->foreign('support_id')->references('id')->on('users');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

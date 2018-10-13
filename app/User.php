@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'deleted_at'
     ];
 
     public static $rules = [
@@ -58,5 +59,14 @@ class User extends Authenticatable
         if($this->user_type == 'C') return true;
 
         return false;
+    }
+
+    public function getTipoAttribute()
+    {
+        if($this->user_type == 'A') return 'Administrador';
+        if($this->user_type == 'S') return 'Soporte';
+        if($this->user_type == 'C') return 'Cliente';
+
+        return 'Desconocido';
     }
 }

@@ -3,13 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Incident extends Model
 {
+    use SoftDeletes;
     //
 
     protected $fillable = [
         'title','description','severity','category_id','level_id','client_id','support_id'
+    ];
+
+    protected $hidden = [
+        'deleted_at'
     ];
 
     public static $rules = [
