@@ -11,7 +11,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    @yield('scripts')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -20,6 +19,7 @@
     <!-- Styles -->
     {{--  <link href="{{asset('css/app.css')}}" rel="stylesheet">  --}}
     <link href="https://bootswatch.com/4/superhero/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     @yield('css')
 </head>
 <body>
@@ -39,5 +39,15 @@
             </div>
         </main>
     </div>
+    <script src="{{ asset('js/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/popper.min.js')}}" type="text/javascript"></script>
+
+    <script src="{{ asset('js/moment.min.js')}}"></script>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js" integrity="sha384-L469/ELG4Bg9sDQbl0hvjMq8pOcqFgkSpwhwnslzvVVGpDjYJ6wJJyYjvG3u8XW7" crossorigin="anonymous"></script>
+
+    <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+    <script src="{{ asset('js/bootstrap-datetimepicker.js')}}" type="text/javascript"></script>
+    @yield('scripts')
 </body>
 </html>

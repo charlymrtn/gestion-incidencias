@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
 @endsection
 
 @section('scripts')
-    <script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js" integrity="sha384-L469/ELG4Bg9sDQbl0hvjMq8pOcqFgkSpwhwnslzvVVGpDjYJ6wJJyYjvG3u8XW7" crossorigin="anonymous"></script>
+
 @endsection
 
 @section('content')
@@ -23,14 +23,14 @@
             </div>
             <div class="form-group col-md-5 ml-auto">
                 <label for="description">Descripción</label>
-                <textarea name="description" id="description" cols="34">{{old('description')}}</textarea>
+                <textarea class="form-control" name="description" id="description" cols="34">{{old('description')}}</textarea>
             </div>
             <div class="form-group col-md-5 ml-auto">
-                <label for="start">Fecha de Inicio</label>
-                <input type="date" class="form-control" name="start" id="start" value="{{old('start',date('Y-m-d'))}}">
+                <label for="start_date">Fecha de Inicio</label>
+                <input type="date" name="start_date" id="start_date" class="form-control" value="{{old('start_date',date('Y-m-d'))}}">
             </div>
             <div class="form-group col-md-4 ml-auto">
-                <button class="btn btn-primary btn-sm"><i class="fas fa-user-plus"></i> Guardar Proyecto</button>
+                <button class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Guardar Proyecto</button>
             </div>
         </form>
         @include('admin.tables.projects')
@@ -38,7 +38,11 @@
 </div>
 
 @foreach ($projects as $project)
-    @include('modals.delete-project')
+    @if($project->trashed())
+        @include('modals.active-project')
+    @else
+        @include('modals.delete-project')
+    @endif
 @endforeach
 
 @endsection

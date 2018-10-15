@@ -13,15 +13,23 @@
                 <tr>
                     <td>{{$project->name}}</td>
                     <td>{{$project->description}}</td>
-                    <td>@if($project->start_date){{$project->start_date}}@endif</td>
+                    <td>@if($project->start){{$project->start}}@endif</td>
                     <td>
-                        <a class="btn btn-primary btn-sm" title="Editar" href="{{route('proyectos.edit',$project->id)}}">
-                            <i class="fas fa-edit"></i>
-                        </a>
+                        @if ($project->trashed())
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteProject{{$project->id}}">
-                            <i class="fas fa-times"></i>
+                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#activeProject{{$project->id}}">
+                            <i class="fas fa-check"></i>
                         </button>
+                        @else
+                            <a class="btn btn-primary btn-sm" title="Editar" href="{{route('proyectos.edit',$project->id)}}">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteProject{{$project->id}}">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        @endif
+
                     </td>
                 </tr>
             @endforeach

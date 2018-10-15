@@ -13,10 +13,10 @@ class Project extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name', 'description', 'start'
+        'name', 'description', 'start_date'
     ];
 
-    protected $dates = ['start'];
+    protected $dates = ['start_date'];
 
     protected $hidden = [
         'deleted_at'
@@ -24,7 +24,8 @@ class Project extends Model
 
     public static $rules = [
         'name' => 'required|string|min:5|min:5|max:30',
-        'description' => 'required|string|min:15|max:255'
+        'description' => 'required|string|min:15|max:255',
+        'start_date' => 'nullable|date|after:today'
     ];
 
     public static $messages = [
@@ -34,11 +35,21 @@ class Project extends Model
         'name.min' => 'el nombre tiene que ser más largo',
         'description.max' => 'la descripción tiene como máximo 255 caracteres',
         'description.min' => 'la descripción tiene que ser más larga',
+        'start_date.after' => 'Escoge otro día, no puede ser antes de hoy.'
     ];
 
-    public function getStartDateAttribute()
+    public function getStartStringAttribute()
     {
-        $date = $this->start;
+        $date = $this->start_date;
+
+        if($date) return $date->format('Y-m-d');
+
+        return null;
+    }
+
+    public function getStartAttribute()
+    {
+        $date = $this->start_date;
 
         if($date) return $date->format('d/m/Y');
 

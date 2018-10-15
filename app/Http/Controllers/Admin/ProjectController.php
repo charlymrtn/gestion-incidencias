@@ -12,7 +12,7 @@ class ProjectController extends Controller
     //
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::withTrashed()->orderBy('created_at','desc')->get();
         return view('admin.projects.index',compact('projects'));
     }
 
@@ -30,6 +30,52 @@ class ProjectController extends Controller
 
     public function edit(Project $proyecto)
     {
+
         return view('admin.projects.edit',compact('proyecto'));
     }
+
+    public function update(Request $request, Project $proyecto)
+    {
+        $this->validate($request,Project::$rules,Project::$messages);
+
+        $proyecto->update($request->all());
+
+        if($proyecto) return redirect()->route('proyectos.index')->with('success','El proyecto fue editado correctamente.');
+
+        return redirect()->back()->with('error','Error al modificar el proyecto.');
+    }
+
+    public function destroy(Project $proyecto)
+    {
+        try{
+            $proyecto->delete();
+            return back()->with('success','proyecto eliminado correctamente.');
+        }catch(\Exception $e){
+            return back()->with('error','error al eliminar el proyecto.');
+        }
+
+    }
+
+    public function active($proyecto)
+    {
+        try{
+            $proyecto = Project::onlyTrashed()
+            ->where('id', $proyecto)
+            ->restore();
+
+            return back()->with('success','proyecto restaurado correctamente.');
+
+        }catch (\Exception $e){
+            return back()->with('error','error al restaurar el proyecto.');
+        }
+
+
+    }
+
+    public function storeCategory(Request $request, Project $proyecto)
+    {
+
+    }
+
+
 }

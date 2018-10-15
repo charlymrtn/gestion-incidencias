@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
 @endsection
 
 @section('scripts')
-    <script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js" integrity="sha384-L469/ELG4Bg9sDQbl0hvjMq8pOcqFgkSpwhwnslzvVVGpDjYJ6wJJyYjvG3u8XW7" crossorigin="anonymous"></script>
+
 @endsection
 
 @section('content')
@@ -23,7 +23,11 @@
             </div>
             <div class="form-group col-md-5">
                 <label for="description">Descripción</label>
-                <textarea name="description" id="description">{{old('description',$proyecto->description)}}</textarea>
+                <textarea class="form-control" name="description" id="description" cols="34">{{old('description',$proyecto->description)}}</textarea>
+            </div>
+            <div class="form-group col-md-5">
+                <label for="start_date">Fecha de Inicio</label>
+                <input type="date" name="start_date" id="start_date" class="form-control" value="{{old('start_date',$proyecto->start_string)}}">
             </div>
             <div class="row">
                 <div class="form-group col-md-3">
@@ -36,7 +40,7 @@
                 </div>
             </div>
         </form>
-        @include('admin.users.tables.projects')
+        @include('admin.projects.tables.levels')
 
     </div>
 </div>

@@ -32,6 +32,11 @@ Route::middleware(['auth'])->group(function () {
                 'proyectos' => 'proyecto'
             ]);
 
+            Route::get('proyectos/{proyecto}/activar','ProjectController@active')->name('proyectos.active');
+
+            Route::post('/categorias/{proyecto}','ProjectController@storeCategory')->name('categorias.store');
+            Route::post('/niveles/{proyecto}','ProjectController@storeLevel')->name('niveles.store');
+
             Route::get('/admin','AdminController@index')->name('config');
         });
 

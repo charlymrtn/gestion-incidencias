@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-          ¿Seguro deseas dar de baja al proyectos {{$project->name}}?
+          ¿Seguro deseas dar de baja al proyecto {{$project->name}}?
         <form method="POST" action="{{route('proyectos.destroy',$project->id)}}">
             @csrf
             @method('DELETE')

@@ -16,11 +16,11 @@
                 @endif
                 <li class="nav-item">
                     <a href="{{route('incidencias.create')}}"
-                    @if(request()->is('incidencias/crear')) class="nav-link active" @else class="nav-link" @endif>Reportar incidencia</a>
+                    @if(Route::is('incidencias.create')) class="nav-link active" @else class="nav-link" @endif>Reportar incidencia</a>
                 </li>
                 @if (Auth::user()->is_admin)
                     <li role="presentation" class="nav- item dropdown">
-                        <a @if(request()->is('usuarios') || request()->is('proyectos') || request()->is('config'))
+                            <a @if(Request::is('usuarios/*') || Request::is('proyectos/*') || Request::is('config/*') || Route::is('usuarios.index') || Route::is('proyectos.index') || Route::is('config'))
                             class="nav-link dropdown-toggle active"
                             @else
                             class="nav-link dropdown-toggle"
