@@ -25,7 +25,7 @@ class Project extends Model
     public static $rules = [
         'name' => 'required|string|min:5|min:5|max:30',
         'description' => 'required|string|min:15|max:255',
-        'start_date' => 'nullable|date|after:today'
+        'start_date' => 'nullable|date|after:yesterday'
     ];
 
     public static $messages = [

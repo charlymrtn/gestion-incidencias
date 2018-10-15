@@ -13,7 +13,6 @@
             @csrf
             @method('PUT')
 
-
             <div class="form group">
                 <label for="name">Nombre</label>
                 <input type="text" class="form-control" name="name" id="name" value="{{old('name',$category->name)}}">
