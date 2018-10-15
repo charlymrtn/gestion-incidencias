@@ -14,6 +14,7 @@
 
     <div class="card-body">
         @include('common.errors')
+        @include('common.notifications')
         <form action="{{route('usuarios.update',$user->id)}}" method="POST">
             @csrf
             @method('PUT')

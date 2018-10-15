@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
 
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->default('categoría recien creada.');
 
             $table->unsignedInteger('project_id');
             $table->foreign('project_id')->references('id')->on('projects');

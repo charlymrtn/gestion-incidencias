@@ -14,6 +14,7 @@
 
     <div class="card-body">
         @include('common.errors')
+        @include('common.notifications')
         <form action="{{route('proyectos.update',$proyecto->id)}}" method="POST">
             @csrf
             @method('PUT')
@@ -40,8 +41,22 @@
                 </div>
             </div>
         </form>
-        @include('admin.projects.tables.levels')
+        @include('admin.projects.tables.levels-categories')
 
     </div>
 </div>
+
+@if($categorias)
+    @foreach($categorias as $category)
+        @include('modals.edit-category')
+        @include('modals.delete-category')
+    @endforeach
+@endif
+@if($niveles)
+    @foreach($niveles as $level)
+        @include('modals.edit-level')
+        @include('modals.delete-level')
+    @endforeach
+@endif
+
 @endsection

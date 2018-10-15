@@ -56,4 +56,14 @@ class Project extends Model
         return null;
     }
 
+    public function categorias()
+    {
+        return $this->hasMany('App\Models\Category');
+    }
+
+    public function niveles()
+    {
+        return $this->hasMany('App\Models\Level');
+    }
+
 }

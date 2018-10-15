@@ -5,6 +5,8 @@
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Fecha de inicio</th>
+                <th># Categorías</th>
+                <th># Niveles</th>
                 <th>Opciones</th>
             </tr>
         </thead>
@@ -14,11 +16,13 @@
                     <td>{{$project->name}}</td>
                     <td>{{$project->description}}</td>
                     <td>@if($project->start){{$project->start}}@endif</td>
+                    <td>{{$project->categorias()->count()}}</td>
+                    <td>{{$project->niveles()->count()}}</td>
                     <td>
                         @if ($project->trashed())
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#activeProject{{$project->id}}">
-                            <i class="fas fa-check"></i>
+                            <i class="fas fa-redo-alt"></i>
                         </button>
                         @else
                             <a class="btn btn-primary btn-sm" title="Editar" href="{{route('proyectos.edit',$project->id)}}">

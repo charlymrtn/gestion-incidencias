@@ -30,12 +30,17 @@ Route::middleware(['auth'])->group(function () {
 
             Route::resource('/proyectos','ProjectController')->parameters([
                 'proyectos' => 'proyecto'
-            ]);
+            ])->except('create','show');
 
             Route::get('proyectos/{proyecto}/activar','ProjectController@active')->name('proyectos.active');
 
-            Route::post('/categorias/{proyecto}','ProjectController@storeCategory')->name('categorias.store');
-            Route::post('/niveles/{proyecto}','ProjectController@storeLevel')->name('niveles.store');
+            Route::resource('/categorias','CategoryController')->parameters([
+                'categorias' => 'categoria'
+            ])->only('store','update','destroy');
+
+            Route::resource('/niveles','LevelController')->parameters([
+                'niveles' => 'nivel'
+            ])->only('store','update','destroy');
 
             Route::get('/admin','AdminController@index')->name('config');
         });

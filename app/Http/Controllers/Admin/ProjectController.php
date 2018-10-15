@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Project;
+use App\Models\Category;
 
 class ProjectController extends Controller
 {
@@ -30,8 +31,9 @@ class ProjectController extends Controller
 
     public function edit(Project $proyecto)
     {
-
-        return view('admin.projects.edit',compact('proyecto'));
+        $niveles = $proyecto->niveles()->get();
+        $categorias = $proyecto->categorias()->orderBy('created_at','desc')->get();
+        return view('admin.projects.edit',compact('proyecto','niveles','categorias'));
     }
 
     public function update(Request $request, Project $proyecto)
