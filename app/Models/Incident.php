@@ -110,5 +110,14 @@ class Incident extends Model
        return 'General';
     }
 
+    public function getStateAttribute()
+    {
+       if($this->active == 0) return 'Resuelto';
+
+       if($this->support_id) return 'Asignado';
+
+       return 'Pendiente';
+    }
+
 
 }

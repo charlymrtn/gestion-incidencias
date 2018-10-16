@@ -24,10 +24,10 @@ class ReportController extends Controller
             $proyecto = ProjectUser::where('user_id',Auth::user()->id)->first();
             if (!$proyecto){
                 $categories = [];
-                return view('admin.report',compact('categories'));
+                return view('incidents.create',compact('categories'));
             }else{
                 $categories = Category::where('project_id',$proyecto->project_id)->get();
-                return view('admin.report',compact('categories'));
+                return view('incidents.create',compact('categories'));
             }
         }
 

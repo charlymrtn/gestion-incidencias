@@ -20,7 +20,7 @@
                         <td><a href="{{route('incidencias.show',$bug->id)}}">{{$bug->id}}</a></td>
                         <td>{{$bug->category_name}}</td>
                         <td>{{$bug->severity_name}}</td>
-                        <td></td>
+                        <td>{{$bug->state}}</td>
                         <td>{{$bug->created}}</td>
                         <td>{{$bug->resume}}</td>
                     </tr>
@@ -51,7 +51,7 @@
                         <td><a href="{{route('incidencias.show',$bug->id)}}">{{$bug->id}}</a></td>
                         <td>{{$bug->category_name}}</td>
                         <td>{{$bug->severity_name}}</td>
-                        <td></td>
+                        <td>{{$bug->state}}</td>
                         <td>{{$bug->created}}</td>
                         <td>{{$bug->resume}}</td>
                         <td>
@@ -85,7 +85,7 @@
                         <td><a href="{{route('incidencias.show',$bug->id)}}">{{$bug->id}}</a></td>
                         <td>{{$bug->category_name}}</td>
                         <td>{{$bug->severity_name}}</td>
-                        <td></td>
+                        <td>{{$bug->state}}</td>
                         <td>{{$bug->created}}</td>
                         <td>{{$bug->resume}}</td>
                         <td>{{$bug->support_name}}</td>

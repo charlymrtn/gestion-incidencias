@@ -37,7 +37,7 @@
                     <td>{{$bug->support_name}}</td>
                     <td>{{$bug->client_name}}</td>
                     <td>Público</td>
-                    <td></td>
+                    <td>{{$bug->state}}</td>
 
                 </tr>
             </tbody>
