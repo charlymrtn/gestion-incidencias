@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Incident as Bug;
+use App\Models\ProjectUser;
+
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,7 +27,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = Auth::user();
+        $p_user = ProjectUser::where('user_id',$user->id)->where('project_id',$user->selected_project_id)->first();
+
+        $my_bugs = Bug::where('project_id',$user->selected_project_id)->where('support_id',$user->id)->get();
+
+        $not_bugs = Bug::where('support_id', null)->where('level_id',$p_user->level_id)->get();
+
+        $reported_bugs = Bug::where('client_id',$user->id)->where('project_id',$user->selected_project_id)->get();
+
+        return view('home',compact('my_bugs','not_bugs','reported_bugs'));
     }
 
     public function welcome()

@@ -38,8 +38,13 @@ class Category extends Model
         'deleted_at', 'created_at', 'updated_at'
     ];
 
-    public function proyecto()
+    public function project()
     {
         return $this->belongsTo('App\Models\Project');
+    }
+
+    public function incidents()
+    {
+        return $this->hasMany('App\Models\Incident');
     }
 }

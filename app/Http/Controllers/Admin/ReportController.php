@@ -28,13 +28,13 @@ class ReportController extends Controller
             }else{
                 $categories = Category::where('project_id',$proyecto->project_id)->get();
                 return view('admin.report',compact('categories'));
-            }  
-        } 
+            }
+        }
 
         $categories = Category::where('project_id',$proyecto->id)->get();
         return view('admin.report',compact('categories'));
 
-        
+
     }
 
     public function index()
@@ -54,6 +54,7 @@ class ReportController extends Controller
         $bug->description = $request->description;
         $bug->severity = $request->severity;
         $bug->category_id = $request->category_id ?: null;
+        $bug->project_id = Auth::user()->selected_project_id ?: null;
         $bug->client_id = Auth::user()->id;
 
         $bug->save();

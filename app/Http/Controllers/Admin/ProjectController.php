@@ -35,8 +35,8 @@ class ProjectController extends Controller
 
     public function edit(Project $proyecto)
     {
-        $niveles = $proyecto->niveles()->get();
-        $categorias = $proyecto->categorias()->orderBy('created_at','desc')->get();
+        $niveles = $proyecto->levels()->get();
+        $categorias = $proyecto->categories()->orderBy('created_at','desc')->get();
         return view('admin.projects.edit',compact('proyecto','niveles','categorias'));
     }
 

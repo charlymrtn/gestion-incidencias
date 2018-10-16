@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\User;
+
 class Incident extends Model
 {
     use SoftDeletes;
@@ -16,6 +18,10 @@ class Incident extends Model
 
     protected $hidden = [
         'deleted_at'
+    ];
+
+    protected $dates = [
+        'deleted_at','created_at','updated_at'
     ];
 
     public static $rules = [
@@ -38,4 +44,52 @@ class Incident extends Model
         'severity.in' => 'el nivel de severidad es inválido.',
         'category_id.exists' => 'la categoría es inválida.',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo('App\Models\Project');
+    }
+
+    public function level()
+    {
+        return $this->belongsTo('App\Models\Level');
+    }
+
+    public function getClientAttribute()
+    {
+        if($this->client_id) return User::find($this->client_id);
+    }
+
+    public function getSupportAttribute()
+    {
+        if($this->support_id) return User::find($this->support_id);
+
+        return null;
+    }
+
+    public function getSeverityNameAttribute()
+    {
+        if($this->severity == 'M') return 'Menor';
+        if($this->severity == 'N') return 'Normal';
+        if($this->severity == 'A') return 'Alta';
+
+        return '';
+    }
+
+    public function getCreatedAttribute()
+    {
+        if($this->created_at) return $this->created_at->format('d/m/Y h:i a');
+    }
+
+    public function getResumeAttribute()
+    {
+        return mb_strimwidth($this->title,0,15,'...');
+    }
+
+
 }

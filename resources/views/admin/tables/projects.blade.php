@@ -16,8 +16,8 @@
                     <td>{{$project->name}}</td>
                     <td>{{$project->description}}</td>
                     <td>@if($project->start){{$project->start}}@endif</td>
-                    <td>{{$project->categorias()->count()}}</td>
-                    <td>{{$project->niveles()->count()}}</td>
+                    <td>{{$project->categories()->count()}}</td>
+                    <td>{{$project->levels()->count()}}</td>
                     <td>
                         @if ($project->trashed())
                         <!-- Button trigger modal -->
