@@ -37,8 +37,6 @@
                     </form>
                 @endif
             </ul>
-            @include('common.errors')
-            @include('common.notifications')
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">

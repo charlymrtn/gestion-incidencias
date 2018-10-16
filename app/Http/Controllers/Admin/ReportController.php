@@ -131,6 +131,40 @@ class ReportController extends Controller
 
     public function next(Bug $incidencia)
     {
-        return $incidencia;
+        if($incidencia->support->id != Auth::user()->id) return back()->with('error','usuario sin permisos para esta acción');
+
+        $levels = $incidencia->project->levels;
+        $level_act = $incidencia->level;
+
+
+        $next_level_id = $this->getNextlevelId($level_act,$levels);
+
+
+        if($next_level_id){
+            $incidencia->level_id = $next_level_id;
+            $incidencia->save();
+            return back()->with('success','incidencia reasignada al siguiente nivel de atención.');
+        }else{
+            return back()->with('error','ya no hay niveles superiores');
+        }
+    }
+
+    private function getNextlevelId($level, $levels)
+    {
+        if(sizeof($levels) <= 1) return null;
+
+        $pos = -1;
+        for ($i=0; $i < sizeof($levels)-1; $i++) {
+            if($levels[$i]->id == $level->id){
+                $pos = $i;
+                break;
+            }
+        }
+
+        if($pos == -1) return null;
+
+       // if($pos == $levels->count()-1) return null;
+
+        return $levels[$pos+1]->id;
     }
 }

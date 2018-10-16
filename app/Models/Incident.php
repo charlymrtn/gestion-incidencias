@@ -110,6 +110,13 @@ class Incident extends Model
        return 'General';
     }
 
+    public function getLevelNameAttribute()
+    {
+       if($this->level) return $this->level->name;
+
+       return 'Desconocido';
+    }
+
     public function getStateAttribute()
     {
        if($this->active == 0) return 'Resuelto';

@@ -6,23 +6,23 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Código</th>
+                    <th>Título</th>
                     <th>Categoría</th>
                     <th>Severidad</th>
                     <th>Estado</th>
+                    <th>Nivel de Atención</th>
                     <th>Fecha Creación</th>
-                    <th>Resumen</th>
                 </tr>
             </thead>
             <tbody id="panel_my_bugs">
                 @foreach ($my_bugs as $bug)
                     <tr @if($bug->state_id == 2) class="bg-success" @elseif(($bug->state_id == 1)) class="bg-info" @else class="bg-warning" @endif>
-                        <td><a href="{{route('incidencias.show',$bug->id)}}">{{$bug->id}}</a></td>
+                        <td><a href="{{route('incidencias.show',$bug->id)}}">{{$bug->title}}</a></td>
                         <td>{{$bug->category_name}}</td>
                         <td>{{$bug->severity_name}}</td>
                         <td>{{$bug->state}}</td>
+                        <td>{{$bug->level_name}}</td>
                         <td>{{$bug->created}}</td>
-                        <td>{{$bug->resume}}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -40,8 +40,8 @@
                     <th>Categoría</th>
                     <th>Severidad</th>
                     <th>Estado</th>
+                    <th>Nivel de Atención</th>
                     <th>Fecha Creación</th>
-                    <th>Resumen</th>
                     <th>Opciones</th>
                 </tr>
             </thead>
@@ -52,8 +52,8 @@
                         <td>{{$bug->category_name}}</td>
                         <td>{{$bug->severity_name}}</td>
                         <td>{{$bug->state}}</td>
+                        <td>{{$bug->level_name}}</td>
                         <td>{{$bug->created}}</td>
-                        <td>{{$bug->resume}}</td>
                         <td>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#takeIncident{{$bug->id}}">
@@ -77,8 +77,8 @@
                     <th>Categoría</th>
                     <th>Severidad</th>
                     <th>Estado</th>
+                    <th>Nivel de Atención</th>
                     <th>Fecha Creación</th>
-                    <th>Resumen</th>
                     <th>Responsable</th>
                 </tr>
             </thead>
@@ -89,8 +89,8 @@
                         <td>{{$bug->category_name}}</td>
                         <td>{{$bug->severity_name}}</td>
                         <td>{{$bug->state}}</td>
+                        <td>{{$bug->level_name}}</td>
                         <td>{{$bug->created}}</td>
-                        <td>{{$bug->resume}}</td>
                         <td>{{$bug->support_name}}</td>
                     </tr>
                 @endforeach

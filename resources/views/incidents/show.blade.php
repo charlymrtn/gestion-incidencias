@@ -7,6 +7,7 @@
     </div>
 
     <div class="card-body bg-light">
+        @include('common.notifications')
         <table class="table table-bordered">
             <thead>
                 <tr class="bg-dark">
@@ -28,7 +29,7 @@
                 <tr class="bg-dark">
                     <th>Asignado a</th>
                     <th>Creado Por</th>
-                    <th>Visibilidad</th>
+                    <th>Nivel de Atención</th>
                     <th>Estado</th>
                 </tr>
             </thead>
@@ -36,7 +37,7 @@
                 <tr>
                     <td>{{$bug->support_name}}</td>
                     <td>{{$bug->client_name}}</td>
-                    <td>Público</td>
+                    <td>{{$bug->level_name}}</td>
                     <td @if($bug->state_id == 2) class="bg-success" @elseif(($bug->state_id == 1)) class="bg-info" @else class="bg-warning" @endif>
                         {{$bug->state}}
                     </td>
