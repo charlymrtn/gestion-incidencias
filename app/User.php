@@ -48,6 +48,11 @@ class User extends Authenticatable
         'password.min' => 'la contraseña tiene que se mínimo de 3 caracteres',
     ];
 
+    public function projects()
+    {
+        return $this->belongsToMany('App\Models\Project');
+    }
+
 
     public function getIsAdminAttribute()
     {
@@ -82,10 +87,5 @@ class User extends Authenticatable
     public function getProjectListAttribute()
     {
         return Project::all();
-    }
-
-    public function projects()
-    {
-        return $this->belongsToMany('App\Models\Project');
     }
 }

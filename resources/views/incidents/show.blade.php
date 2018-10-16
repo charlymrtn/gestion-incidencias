@@ -62,8 +62,22 @@
                 </tr>
             </tbody>
         </table>
-        @if(!Auth::user()->is_client && !$bug->support)
+        @if(!$bug->support && Auth::user()->is_support && $bug->state_id != 2)
             <button class="btn btn-primary btn-sm">Atender Incidencia</button>
+        @endif
+
+        @if($bug->client_id == Auth::user()->id)
+            @if($bug->state_id == 2)
+                <button class="btn btn-info btn-sm">Volver a abrir la incidencia</button>
+            @endif
+            @if($bug->state_id != 2)
+                <button class="btn btn-success btn-sm">Marcar como resuelto</button>
+            @endif
+            <button class="btn btn-warning btn-sm">Editar la incidencia</button>
+        @endif
+
+        @if($bug->support && $bug->support->id == Auth::user()->id && $bug->state_id != 2)
+            <button class="btn btn-danger btn-sm">Derivar al siguiente nivel</button>
         @endif
     </div>
 </div>

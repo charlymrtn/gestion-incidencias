@@ -119,5 +119,14 @@ class Incident extends Model
        return 'Pendiente';
     }
 
+    public function getStateIdAttribute()
+    {
+       if($this->active == 0) return 2;
+
+       if($this->support_id) return 1;
+
+       return 0;
+    }
+
 
 }
