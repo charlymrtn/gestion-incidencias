@@ -6,6 +6,8 @@
 
 @section('scripts')
     <script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js" integrity="sha384-L469/ELG4Bg9sDQbl0hvjMq8pOcqFgkSpwhwnslzvVVGpDjYJ6wJJyYjvG3u8XW7" crossorigin="anonymous"></script>
+    
+    <script src="{{ asset('js/custom.js')}}" type="text/javascript"></script>
 @endsection
 
 @section('content')
@@ -42,15 +44,21 @@
             </div>
         </form>
         <div class="row">
-            <div class="form-group">
-                <select name="" id="" class="form-control">
+            <div class="col-md-4">
+                <select name="projects" id="projects" class="form-control">
                     <option value="">Selecciona un proyecto</option>
+                    @foreach ($projects as $project)
+                        <option value="{{$project->id}}">{{$project->name}}</option>  
+                    @endforeach
                 </select>
             </div>
-            <div class="form-group">
-                <select name="" id="" class="form-control">
+            <div class="col-md-4">
+                <select name="levels" id="levels" class="form-control">
                     <option value="">Selecciona un nivel</option>
                 </select>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary btn-block btn-sm"><i class="fas fa-plus"></i>Asignar</button>
             </div>
         </div>
         @include('admin.users.tables.projects-users')

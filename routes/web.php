@@ -42,6 +42,8 @@ Route::middleware(['auth'])->group(function () {
                 'niveles' => 'nivel'
             ])->only('store','update','destroy');
 
+            Route::get('/proyecto/{proyecto}/niveles','LevelController@getLevelsByProject')->name('proyecto.niveles');
+
             Route::get('/admin','AdminController@index')->name('config');
         });
 

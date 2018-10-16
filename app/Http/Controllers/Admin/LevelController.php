@@ -52,4 +52,13 @@ class LevelController extends Controller
             return back()->with('error','error al eliminar el nivel');
         }
     }
+
+    public function getLevelsByProject($proyecto)
+    {
+
+        $niveles = Nivel::where('project_id',$proyecto)->get();
+
+        if($niveles) return $niveles;
+
+    }
 }

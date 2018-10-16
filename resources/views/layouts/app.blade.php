@@ -41,14 +41,10 @@
         </main>
     </div>
     <script src="{{ asset('js/jquery.min.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('js/popper.min.js')}}" type="text/javascript"></script>
 
-    <script src="{{ asset('js/moment.min.js')}}"></script>
 
     <script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js" integrity="sha384-L469/ELG4Bg9sDQbl0hvjMq8pOcqFgkSpwhwnslzvVVGpDjYJ6wJJyYjvG3u8XW7" crossorigin="anonymous"></script>
 
-    <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-    <script src="{{ asset('js/bootstrap-datetimepicker.js')}}" type="text/javascript"></script>
     @yield('scripts')
 </body>
 </html>
