@@ -35,7 +35,8 @@
                 <textarea name="description" id="description" class="form-control">{{old('description')}}</textarea>
             </div>
             <div class="form-group col-md-4 mx-auto">
-                <button class="btn btn-primary">Registrar</button>
+                <button class="btn btn-primary btn-sm">Registrar</button>
+                <a href="{{route('home')}}" class="btn btn-info btn-sm">Regresar</a>
             </div>
         </form>
     </div>

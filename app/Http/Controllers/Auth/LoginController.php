@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use App\Models\ProjectUser;
+
 class LoginController extends Controller
 {
     /*
@@ -36,4 +38,11 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // protected function authenticated(Request $request, $user)
+    // {
+    //     $p_user = ProjectUser::where('user_id',$user->id)->get();
+
+    //     if($p_user)
+    // }
 }

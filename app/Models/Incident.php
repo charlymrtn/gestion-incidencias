@@ -60,16 +60,28 @@ class Incident extends Model
         return $this->belongsTo('App\Models\Level');
     }
 
-    public function getClientAttribute()
+    public function support()
     {
-        if($this->client_id) return User::find($this->client_id);
+        return $this->belongsTo('App\User','support_id');
     }
 
-    public function getSupportAttribute()
+    public function client()
     {
-        if($this->support_id) return User::find($this->support_id);
+        return $this->belongsTo('App\User','client_id');
+    }
 
-        return null;
+    public function getClientNameAttribute()
+    {
+        if($this->client) return $this->client->name;
+
+        return 'desconocido';
+    }
+
+    public function getSupportNameAttribute()
+    {
+        if($this->support) return $this->support->name;
+
+        return 'No Asignado';
     }
 
     public function getSeverityNameAttribute()
@@ -89,6 +101,13 @@ class Incident extends Model
     public function getResumeAttribute()
     {
         return mb_strimwidth($this->title,0,15,'...');
+    }
+
+    public function getCategoryNameAttribute()
+    {
+       if($this->category) return $this->category->name;
+
+       return 'General';
     }
 
 

@@ -38,6 +38,21 @@ class Project extends Model
         'start_date.after' => 'Escoge otro día, no puede ser antes de hoy.'
     ];
 
+    public function categories()
+    {
+        return $this->hasMany('App\Models\Category');
+    }
+
+    public function levels()
+    {
+        return $this->hasMany('App\Models\Level');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
+
     public function getStartStringAttribute()
     {
         $date = $this->start_date;
@@ -56,19 +71,13 @@ class Project extends Model
         return null;
     }
 
-    public function categories()
+    public function getFirstLevelAttribute()
     {
-        return $this->hasMany('App\Models\Category');
+        if($this->levels) return $this->levels()->first();
+
+        return null;
     }
 
-    public function levels()
-    {
-        return $this->hasMany('App\Models\Level');
-    }
 
-    public function users()
-    {
-        return $this->belongsToMany('App\User');
-    }
 
 }

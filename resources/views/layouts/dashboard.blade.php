@@ -1,3 +1,5 @@
+@if(Auth::user()->is_support)
+
 <div class="card bg-success mb-3">
     <div class="card-header">Incidencias asignadas a mi.</div>
     <div class="card-body">
@@ -15,8 +17,8 @@
             <tbody id="panel_my_bugs">
                 @foreach ($my_bugs as $bug)
                     <tr>
-                        <td>{{$bug->id}}</td>
-                        <td>{{$bug->category->name}}</td>
+                        <td><a href="{{route('incidencias.show',$bug->id)}}">{{$bug->id}}</a></td>
+                        <td>{{$bug->category_name}}</td>
                         <td>{{$bug->severity_name}}</td>
                         <td></td>
                         <td>{{$bug->created}}</td>
@@ -46,8 +48,8 @@
             <tbody id="panel_not_bugs">
                 @foreach ($not_bugs as $bug)
                     <tr>
-                        <td>{{$bug->id}}</td>
-                        <td>{{$bug->category->name}}</td>
+                        <td><a href="{{route('incidencias.show',$bug->id)}}">{{$bug->id}}</a></td>
+                        <td>{{$bug->category_name}}</td>
                         <td>{{$bug->severity_name}}</td>
                         <td></td>
                         <td>{{$bug->created}}</td>
@@ -61,7 +63,7 @@
         </table>
     </div>
 </div>
-
+@endif
 <div class="card bg-info mb-3">
     <div class="card-header">Incidencias reportadas por mi.</div>
     <div class="card-body">
@@ -80,13 +82,13 @@
             <tbody id="panel_reported_bugs">
                 @foreach ($reported_bugs as $bug)
                     <tr>
-                        <td>{{$bug->id}}</td>
-                        <td>{{$bug->category->name}}</td>
+                        <td><a href="{{route('incidencias.show',$bug->id)}}">{{$bug->id}}</a></td>
+                        <td>{{$bug->category_name}}</td>
                         <td>{{$bug->severity_name}}</td>
                         <td></td>
                         <td>{{$bug->created}}</td>
                         <td>{{$bug->resume}}</td>
-                        <td>@if($bug->support) {{$bug->support->name}} @else No asignado @endif</td>
+                        <td>{{$bug->support_name}}</td>
                     </tr>
                 @endforeach
             </tbody>
