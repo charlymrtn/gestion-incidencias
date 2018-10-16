@@ -23,6 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
 
+            $table->unsignedInteger('selected_project_id')->nullable();
+            $table->foreign('selected_project_id')->references('id')->on('projects');
+
             $table->timestamps();
             $table->softDeletes();
         });

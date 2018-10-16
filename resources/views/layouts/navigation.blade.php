@@ -13,13 +13,32 @@
                 @if (Auth::check())
                     <form action="" class="navbar-form">
                         <div class="form-group">
-                            <select class="form-control" name="" id="">
-                                <option value="">Proyecto A</option>
+                            <select class="form-control" name="list_project" id="list_project">
+                                <option value="">Selecciona un proyecto</option>
+                                @if (Auth::user()->is_support)
+                                    @foreach (Auth::user()->projects as $project)
+                                        @if (Auth::user()->selected_project_id && (Auth::user()->selected_project_id == $project->id))
+                                            <option value="{{$project->id}}" selected>{{$project->name}}</option> 
+                                        @else
+                                            <option value="{{$project->id}}">{{$project->name}}</option> 
+                                        @endif 
+                                    @endforeach
+                                @else
+                                    @foreach (Auth::user()->project_list as $project)
+                                        @if (Auth::user()->selected_project_id && (Auth::user()->selected_project_id == $project->id))
+                                            <option value="{{$project->id}}" selected>{{$project->name}}</option> 
+                                        @else
+                                            <option value="{{$project->id}}">{{$project->name}}</option> 
+                                        @endif 
+                                    @endforeach
+                                @endif
                             </select>
                         </div>
                     </form>
                 @endif
             </ul>
+            @include('common.errors')
+            @include('common.notifications')
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">

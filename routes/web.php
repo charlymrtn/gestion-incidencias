@@ -23,10 +23,16 @@ Route::middleware(['auth'])->group(function () {
             'incidencias' => 'incidencia'
         ]);
 
+        Route::get('proyectos/{proyecto}/seleccionar','ProjectController@select')->name('proyectos.select');
+
         Route::middleware(['admin'])->group(function () {
             Route::resource('/usuarios','UserController')->parameters([
                 'usuarios' => 'usuario'
             ])->except('create','show');
+
+            Route::post('/usuarios/proyectos','ProjectUserController@store')->name('usuarios.proyectos.store');
+            Route::put('/usuarios/proyectos/{p_user}','ProjectUserController@update')->name('usuarios.proyectos.update');
+            Route::delete('/usuarios/proyectos/{p_user}','ProjectUserController@destroy')->name('usuarios.proyectos.destroy');
 
             Route::resource('/proyectos','ProjectController')->parameters([
                 'proyectos' => 'proyecto'

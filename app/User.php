@@ -7,6 +7,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Models\Project;
+
 class User extends Authenticatable
 {
     use Notifiable, SoftDeletes;
@@ -26,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'deleted_at'
+        'password', 'remember_token', 'deleted_at', 'email_verified_at'
     ];
 
     public static $rules = [
@@ -61,6 +63,13 @@ class User extends Authenticatable
         return false;
     }
 
+    public function getIsSupportAttribute()
+    {
+        if($this->user_type == 'S') return true;
+
+        return false;
+    }
+
     public function getTipoAttribute()
     {
         if($this->user_type == 'A') return 'Administrador';
@@ -68,5 +77,15 @@ class User extends Authenticatable
         if($this->user_type == 'C') return 'Cliente';
 
         return 'Desconocido';
+    }
+
+    public function getProjectListAttribute()
+    {
+        return Project::all();
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany('App\Models\Project');
     }
 }

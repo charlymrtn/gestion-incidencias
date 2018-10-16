@@ -8,22 +8,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Proyecto A</td>
-                <td>Nivel A1</td>
-                <td>
-                    <form method="POST" action="">
-                        @csrf
-                        @method('DELETE')
-                        <a class="btn btn-primary btn-sm" title="Editar" href="">
+            @foreach ($project_user as $p_user)
+                <tr>
+                    <td>{{$p_user->project->name}}</td>
+                    <td>{{$p_user->level->name}}</td>
+                    <td>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editRelation{{$p_user->id}}">
                             <i class="fas fa-edit"></i>
-                        </a>
-                        <button type="submit" class="btn btn-danger btn-sm" title="Quitar">
+                        </button>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteRelation{{$p_user->id}}">
                             <i class="fas fa-times"></i>
                         </button>
-                    </form>
-                </td>
-            </tr>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

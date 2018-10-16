@@ -43,26 +43,38 @@
                 </div>
             </div>
         </form>
-        <div class="row">
-            <div class="col-md-4">
-                <select name="projects" id="projects" class="form-control">
-                    <option value="">Selecciona un proyecto</option>
-                    @foreach ($projects as $project)
-                        <option value="{{$project->id}}">{{$project->name}}</option>  
-                    @endforeach
-                </select>
+        <form action="{{route('usuarios.proyectos.store')}}" method="POST">
+            <div class="row">
+                @csrf
+                <input type="hidden" name="user_id" value="{{$user->id}}">
+                <div class="col-md-4">
+                    <select name="project_id" id="projects" class="form-control">
+                        <option value="">Selecciona un proyecto</option>
+                        @foreach ($projects as $project)
+                            <option value="{{$project->id}}">{{$project->name}}</option>  
+                        @endforeach
+                    </select>
+                </div>
+                <br>
+                <div class="col-md-4">
+                    <select name="level_id" id="levels" class="form-control">
+                        <option value="">Selecciona un nivel</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-primary btn-block btn-sm"><i class="fas fa-plus"></i>Asignar</button>
+                </div>
             </div>
-            <div class="col-md-4">
-                <select name="levels" id="levels" class="form-control">
-                    <option value="">Selecciona un nivel</option>
-                </select>
-            </div>
-            <div class="col-md-4">
-                <button class="btn btn-primary btn-block btn-sm"><i class="fas fa-plus"></i>Asignar</button>
-            </div>
-        </div>
+        </form>
         @include('admin.users.tables.projects-users')
 
     </div>
 </div>
+@if($project_user)
+    @foreach($project_user as $p_user)
+        @include('modals.edit-relation')
+        @include('modals.delete-relation')
+    @endforeach
+@endif
+
 @endsection

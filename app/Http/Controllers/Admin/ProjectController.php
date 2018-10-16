@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Project;
+use App\Models\ProjectUser;
 use App\Models\Category;
+
+use Auth;
+use Session;
 
 class ProjectController extends Controller
 {
@@ -74,9 +78,19 @@ class ProjectController extends Controller
 
     }
 
-    public function storeCategory(Request $request, Project $proyecto)
+    public function select(Project $proyecto)
     {
+        //return $proyecto;
+        $user = Auth::user();
+        $project = ProjectUser::where('user_id',$user->id)->where('project_id',$proyecto->id)->first();
+        if($user->is_support){
+            if(!$project) return back()->with('error','el usuario no tiene asignado ese proyecto');
+        }
 
+        $user->selected_project_id = $proyecto->id;
+        $user->save();
+
+        return back();
     }
 
 

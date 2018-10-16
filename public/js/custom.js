@@ -1,4 +1,5 @@
 $(function() {
+    $('#list_project').on('change',onProjectSelected)
     $('#projects').on('change',onSelectProject);
 });
 
@@ -17,4 +18,11 @@ function onSelectProject(){
 
         $('#levels').html(html);
     });
+}
+
+function onProjectSelected() {
+    var project_id = $(this).val();
+    var url = '/proyectos/' + project_id + '/seleccionar';
+    //console.log(url);
+    location.href = url;
 }

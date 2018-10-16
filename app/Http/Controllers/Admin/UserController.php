@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Models\Project;
+use App\Models\ProjectUser;
 
 class UserController extends Controller
 {
@@ -37,7 +38,9 @@ class UserController extends Controller
     {
         $user = $usuario;
         $projects = Project::orderBy('created_at', 'DESC')->get();
-        return view('admin.users.edit',compact('user','projects'));
+        $project_user = ProjectUser::where('user_id',$user->id)->get();
+
+        return view('admin.users.edit',compact('user','projects','project_user'));
     }
 
     public function update(Request $request, User $usuario)

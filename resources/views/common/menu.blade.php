@@ -14,10 +14,18 @@
                         @if(request()->is('incidencias.index')) class="nav-link active" @else class="nav-link" @endif>Ver incidencias</a>
                     </li>
                 @endif
+                @if (Auth::user()->is_client || Auth::user()->is_admin)
                 <li class="nav-item">
                     <a href="{{route('incidencias.create')}}"
                     @if(Route::is('incidencias.create')) class="nav-link active" @else class="nav-link" @endif>Reportar incidencia</a>
                 </li>
+                @endif
+                @if (Auth::user()->is_support && (Auth::user()->projects->count() > 0))
+                <li class="nav-item">
+                    <a href="{{route('incidencias.create')}}"
+                    @if(Route::is('incidencias.create')) class="nav-link active" @else class="nav-link" @endif>Reportar incidencia</a>
+                </li>
+                @endif
                 @if (Auth::user()->is_admin)
                     <li role="presentation" class="nav- item dropdown">
                             <a @if(Request::is('usuarios/*') || Request::is('proyectos/*') || Request::is('config/*') || Route::is('usuarios.index') || Route::is('proyectos.index') || Route::is('config'))

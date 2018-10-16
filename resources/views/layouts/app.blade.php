@@ -44,7 +44,7 @@
 
 
     <script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js" integrity="sha384-L469/ELG4Bg9sDQbl0hvjMq8pOcqFgkSpwhwnslzvVVGpDjYJ6wJJyYjvG3u8XW7" crossorigin="anonymous"></script>
-
+    <script src="{{ asset('js/custom.js')}}" type="text/javascript"></script>
     @yield('scripts')
 </body>
 </html>

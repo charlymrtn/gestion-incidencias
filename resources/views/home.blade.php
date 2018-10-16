@@ -11,7 +11,9 @@
             </div>
         @endif
 
-        <img src="{{asset('img/zelda.jpg')}}" class="img-fluid" alt="Responsive image">
+        @include('layouts.dashboard')
+
+        {{-- <img src="{{asset('img/zelda.jpg')}}" class="img-fluid" alt="Responsive image"> --}}
     </div>
 </div>
 @endsection

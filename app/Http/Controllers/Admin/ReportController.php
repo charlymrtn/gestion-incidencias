@@ -7,8 +7,11 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Category;
 use App\Models\Incident as Bug;
+use App\Models\ProjectUser;
+use App\Models\Project;
 
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class ReportController extends Controller
 {
@@ -16,8 +19,22 @@ class ReportController extends Controller
 
     public function create()
     {
-        $categories = Category::where('project_id',1)->get();
+        $proyecto = Project::find(Auth::user()->selected_project_id);
+        if(!$proyecto){
+            $proyecto = ProjectUser::where('user_id',Auth::user()->id)->first();
+            if (!$proyecto){
+                $categories = [];
+                return view('admin.report',compact('categories'));
+            }else{
+                $categories = Category::where('project_id',$proyecto->project_id)->get();
+                return view('admin.report',compact('categories'));
+            }  
+        } 
+
+        $categories = Category::where('project_id',$proyecto->id)->get();
         return view('admin.report',compact('categories'));
+
+        
     }
 
     public function index()
