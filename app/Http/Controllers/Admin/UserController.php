@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use App\Models\Project;
 
 class UserController extends Controller
 {
@@ -35,7 +36,8 @@ class UserController extends Controller
     public function edit(User $usuario)
     {
         $user = $usuario;
-        return view('admin.users.edit',compact('user'));
+        $projects = Project::orderBy('created_at', 'DESC')->get();
+        return view('admin.users.edit',compact('user','projects'));
     }
 
     public function update(Request $request, User $usuario)

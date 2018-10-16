@@ -41,7 +41,19 @@
                 </div>
             </div>
         </form>
-        @include('admin.users.tables.projects')
+        <div class="row">
+            <div class="form-group">
+                <select name="" id="" class="form-control">
+                    <option value="">Selecciona un proyecto</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select name="" id="" class="form-control">
+                    <option value="">Selecciona un nivel</option>
+                </select>
+            </div>
+        </div>
+        @include('admin.users.tables.projects-users')
 
     </div>
 </div>

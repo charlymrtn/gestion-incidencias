@@ -9,9 +9,9 @@
 @endsection
 
 @section('content')
+
 <div class="card w-80">
     <div class="card-header">Proyectos</div>
-
     <div class="card-body">
         @include('common.errors')
         @include('common.notifications')
@@ -33,6 +33,7 @@
                 <button class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Guardar Proyecto</button>
             </div>
         </form>
+
         @include('admin.tables.projects')
     </div>
 </div>
