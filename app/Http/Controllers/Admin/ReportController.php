@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Category;
 use App\Models\Incident as Bug;
-use App\Models\ProjectUser;
+use App\Models\ProjectUser as Assign;
 use App\Models\Project;
 
 use Illuminate\Support\Facades\Auth;
@@ -69,5 +69,68 @@ class ReportController extends Controller
     {
         $bug = $incidencia;
         return view('incidents.show',compact('bug'));
+    }
+
+    public function take(Bug $incidencia)
+    {
+        if(Auth::user()->is_support){
+            $p_user = Assign::where('project_id',$incidencia->project_id)
+                                ->where('user_id',Auth::user()->id)->first();
+
+            if(!$p_user) return back()->with('error','no existe relación');
+
+            if($p_user->level_id != $incidencia->level_id) return back()->with('error','nivel erróneo');
+
+            $incidencia->support_id = Auth::user()->id;
+            $incidencia->save();
+
+            return back()->with('success','ahora atiendes la incidencia');
+
+        }else{
+            return back()->with('error','usuario sin permisos para esta acción');
+
+        }
+    }
+
+    public function edit(Bug $incidencia)
+    {
+        return $incidencia;
+    }
+
+    public function solve(Bug $incidencia)
+    {
+        if($incidencia->client_id == Auth::user()->id){
+
+            if($incidencia->active == 0) return back()->with('error','imposible resolver');
+
+            $incidencia->active = 0;
+            $incidencia->save();
+
+            return back()->with('success','incidencia resuelta');
+
+        }else{
+            return back()->with('error','usuario sin permisos para esta acción');
+        }
+    }
+
+    public function open(Bug $incidencia)
+    {
+        if($incidencia->client_id == Auth::user()->id){
+
+            if($incidencia->active == 1) return back()->with('error','imposible abrir');
+
+            $incidencia->active = 1;
+            $incidencia->save();
+
+            return back()->with('success','incidencia abierta');
+
+        }else{
+            return back()->with('error','usuario sin permisos para esta acción');
+        }
+    }
+
+    public function next(Bug $incidencia)
+    {
+        return $incidencia;
     }
 }

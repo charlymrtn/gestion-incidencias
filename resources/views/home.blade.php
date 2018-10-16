@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">Panel Principal</div>
+    <div class="card-header bg-primary">Panel Principal</div>
 
     <div class="card-body">
         @if (session('status'))

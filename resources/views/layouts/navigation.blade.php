@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+<nav class="navbar navbar-expand-md navbar-light navbar-laravel bg-light">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
@@ -18,18 +18,18 @@
                                 @if (Auth::user()->is_support)
                                     @foreach (Auth::user()->projects as $project)
                                         @if (Auth::user()->selected_project_id && (Auth::user()->selected_project_id == $project->id))
-                                            <option value="{{$project->id}}" selected>{{$project->name}}</option> 
+                                            <option value="{{$project->id}}" selected>{{$project->name}}</option>
                                         @else
-                                            <option value="{{$project->id}}">{{$project->name}}</option> 
-                                        @endif 
+                                            <option value="{{$project->id}}">{{$project->name}}</option>
+                                        @endif
                                     @endforeach
                                 @else
                                     @foreach (Auth::user()->project_list as $project)
                                         @if (Auth::user()->selected_project_id && (Auth::user()->selected_project_id == $project->id))
-                                            <option value="{{$project->id}}" selected>{{$project->name}}</option> 
+                                            <option value="{{$project->id}}" selected>{{$project->name}}</option>
                                         @else
-                                            <option value="{{$project->id}}">{{$project->name}}</option> 
-                                        @endif 
+                                            <option value="{{$project->id}}">{{$project->name}}</option>
+                                        @endif
                                     @endforeach
                                 @endif
                             </select>

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card w-80">
-    <div class="card-header">Reportar Incidencia</div>
+    <div class="card-header bg-primary">Reportar Incidencia</div>
 
     <div class="card-body">
         @include('common.errors')

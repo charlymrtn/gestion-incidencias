@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header">Menú</div>
+    <div class="card-header bg-primary">Menú</div>
 
     <div class="card-body">
         <ul class="nav nav-pills nav-stacked">
