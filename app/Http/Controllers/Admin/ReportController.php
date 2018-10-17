@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Incident as Bug;
 use App\Models\ProjectUser as Assign;
 use App\Models\Project;
+use App\Models\Level as Nivel;
 
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -129,6 +130,23 @@ class ReportController extends Controller
         }
     }
 
+    public function prev(Bug $incidencia)
+    {
+        if($incidencia->support->id != Auth::user()->id) return back()->with('error','usuario sin permisos para esta acción');
+
+        if($incidencia->prev_level_id){
+            $incidencia->level_id =$incidencia->prev_level_id;
+            $incidencia->prev_level_id = null;
+            $incidencia->support_id = null;
+            $incidencia->max_level = 0;
+            $incidencia->save();
+            return redirect()->route('home')->with('success','incidencia reasignada al nivel previo de atención.');
+        }else{
+
+            return back()->with('error','ya no hay niveles anteriores');
+        }
+    }
+
     public function next(Bug $incidencia)
     {
         if($incidencia->support->id != Auth::user()->id) return back()->with('error','usuario sin permisos para esta acción');
@@ -136,15 +154,21 @@ class ReportController extends Controller
         $levels = $incidencia->project->levels;
         $level_act = $incidencia->level;
 
-
         $next_level_id = $this->getNextlevelId($level_act,$levels);
 
-
         if($next_level_id){
+            $incidencia->prev_level_id = $incidencia->level_id;
             $incidencia->level_id = $next_level_id;
+            $incidencia->support_id = null;
+
+            $levels_proj = Nivel::where('project_id',$incidencia->project->id)->orderBy('id', 'asc');
+            if($incidencia->level_id == $levels_proj->last()->id) $incidencia->max_level = 1;
+
             $incidencia->save();
-            return back()->with('success','incidencia reasignada al siguiente nivel de atención.');
+            return redirect()->route('home')->with('success','incidencia reasignada al siguiente nivel de atención.');
         }else{
+            $incidencia->max_level = 1;
+            $incidencia->save();
             return back()->with('error','ya no hay niveles superiores');
         }
     }

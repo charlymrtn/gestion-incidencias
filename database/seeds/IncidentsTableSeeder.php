@@ -42,7 +42,7 @@ class IncidentsTableSeeder extends Seeder
             'severity' => 'A',
             'category_id' => 1,
             'project_id' => 1,
-            'level_id' => 3,
+            'level_id' => 1,
             'client_id' => 4,
             'support_id' => 2,
         ]);
@@ -53,7 +53,7 @@ class IncidentsTableSeeder extends Seeder
             'severity' => 'M',
             'category_id' => 4,
             'project_id' => 2,
-            'level_id' => 4,
+            'level_id' => 2,
             'client_id' => 5,
             'support_id' => 3,
         ]);
@@ -64,7 +64,7 @@ class IncidentsTableSeeder extends Seeder
             'severity' => 'A',
             'category_id' => 3,
             'project_id' => 1,
-            'level_id' => 3,
+            'level_id' => 1,
             'client_id' => 2
             //'support_id' = ,
         ]);
@@ -75,7 +75,7 @@ class IncidentsTableSeeder extends Seeder
             'severity' => 'M',
             //'category_id' = ,
             'project_id' => 2,
-            'level_id' => 4,
+            'level_id' => 2,
             'client_id' => 4,
             'support_id' => 2
         ]);

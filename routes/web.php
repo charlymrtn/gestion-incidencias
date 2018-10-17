@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/incidencias/{incidencia}/abrir','ReportController@open')->name('incidencias.open');
         Route::get('/incidencias/{incidencia}/resolver','ReportController@solve')->name('incidencias.solve');
         Route::get('/incidencias/{incidencia}/derivar','ReportController@next')->name('incidencias.next');
+        Route::get('/incidencias/{incidencia}/regresar','ReportController@prev')->name('incidencias.prev');
 
         Route::get('proyectos/{proyecto}/seleccionar','ProjectController@select')->name('proyectos.select');
 

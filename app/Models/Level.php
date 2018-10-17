@@ -35,4 +35,9 @@ class Level extends Model
     {
         return $this->belongsTo('App\Models\Project');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
 }

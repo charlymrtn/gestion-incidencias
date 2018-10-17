@@ -22,6 +22,8 @@ class CreateIncidentsTable extends Migration
 
             $table->boolean('active')->default(1);
 
+            $table->boolean('max_level')->default(0);
+
             $table->unsignedInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
 
@@ -36,6 +38,9 @@ class CreateIncidentsTable extends Migration
 
             $table->unsignedInteger('support_id')->nullable();
             $table->foreign('support_id')->references('id')->on('users');
+
+            $table->unsignedInteger('prev_level_id')->nullable();
+            $table->foreign('prev_level_id')->references('id')->on('levels');
 
             $table->timestamps();
             $table->softDeletes();

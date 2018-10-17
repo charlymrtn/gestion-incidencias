@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\Project;
+use App\Models\ProjectUser as Assign;
 
 class User extends Authenticatable
 {
@@ -87,5 +88,14 @@ class User extends Authenticatable
     public function getProjectListAttribute()
     {
         return Project::all();
+    }
+
+    public function getLevelsAttribute()
+    {
+        $levels = Assign::where('user_id',$this->id)->get();
+
+        if($levels) return $levels;
+
+        return null;
     }
 }

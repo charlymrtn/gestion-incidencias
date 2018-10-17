@@ -11,6 +11,9 @@
             </div>
         @endif
 
+        @include('common.errors')
+        @include('common.notifications')
+
         @include('layouts.dashboard')
 
         {{-- <img src="{{asset('img/zelda.jpg')}}" class="img-fluid" alt="Responsive image"> --}}

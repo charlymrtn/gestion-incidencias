@@ -65,7 +65,7 @@
                 </tr>
             </tbody>
         </table>
-        @if(!$bug->support && Auth::user()->is_support && $bug->state_id != 2)
+        @if(!$bug->support && Auth::user()->is_support && $bug->state_id != 2 && Auth::user()->levels->contains('level_id',$bug->level->id))
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#takeIncident{{$bug->id}}">
                 Atender incidencia
@@ -88,14 +88,22 @@
         @endif
 
         @if($bug->support && $bug->support->id == Auth::user()->id && $bug->state_id != 2)
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#nextIncident{{$bug->id}}">
-                Derivar al siguiente nivel
-            </button>
+            @if(!$bug->max_level)
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#nextIncident{{$bug->id}}">
+                    Derivar al siguiente nivel
+                </button>
+            @endif
+            @if($bug->prev_level_id || $bug->max_level)
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#prevIncident{{$bug->id}}">
+                    Derivar al nivel previo
+                </button>
+            @endif
         @endif
     </div>
 </div>
-@if(!$bug->support && Auth::user()->is_support && $bug->state_id != 2)
+@if(!$bug->support && Auth::user()->is_support && $bug->state_id != 2 && Auth::user()->levels->contains('level_id',$bug->level->id))
     @include('modals.take-incident')
 @endif
 
@@ -108,7 +116,13 @@
 @endif
 
 @if($bug->support && $bug->support->id == Auth::user()->id && $bug->state_id != 2)
-    @include('modals.next-incident')
+    @if(!$bug->max_level)
+        @include('modals.next-incident')
+    @endif
+
+    @if($bug->prev_level_id || $bug->max_level)
+        @include('modals.prev-incident')
+    @endif
 @endif
 
 @endsection

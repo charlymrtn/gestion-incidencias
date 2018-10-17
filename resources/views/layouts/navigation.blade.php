@@ -14,7 +14,6 @@
                     <form action="" class="navbar-form">
                         <div class="form-group">
                             <select class="form-control" name="list_project" id="list_project">
-                                <option value="">Selecciona un proyecto</option>
                                 @if (Auth::user()->is_support)
                                     @foreach (Auth::user()->projects as $project)
                                         @if (Auth::user()->selected_project_id && (Auth::user()->selected_project_id == $project->id))
