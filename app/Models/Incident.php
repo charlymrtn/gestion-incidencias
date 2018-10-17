@@ -70,6 +70,11 @@ class Incident extends Model
         return $this->belongsTo('App\User','client_id');
     }
 
+    public function messages()
+    {
+        return $this->hasMany('App\Models\Message');
+    }
+
     public function getClientNameAttribute()
     {
         if($this->client) return $this->client->name;

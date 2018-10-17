@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Project');
     }
 
+    public function messages()
+    {
+        return $this->hasMany('App\Models\Message');
+    }
+
 
     public function getIsAdminAttribute()
     {
@@ -88,7 +93,7 @@ class User extends Authenticatable
     public function getProjectListAttribute()
     {
         if($this->is_support) return $this->projects;
-        
+
         return Project::all();
     }
 
@@ -99,6 +104,13 @@ class User extends Authenticatable
         if($levels) return $levels;
 
         return null;
+    }
+
+    public function getImagePathAttribute()
+    {
+        if($this->is_support) return 'img/support.png';
+
+        return 'img/client.jpg';
     }
 
     public function canTake($bug){

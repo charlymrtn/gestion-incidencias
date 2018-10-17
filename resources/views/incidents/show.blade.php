@@ -3,11 +3,10 @@
 @section('content')
 <div class="card w-80">
     <div class="card-header bg-primary">
-        Incidencia {{$bug->title}} <br> <a href="{{route('home')}}" class="btn btn-warning btn-sm">Regresar</a>
+        Incidencia {{$bug->title}} <br> <a href="{{URL::previous()}}" class="btn btn-warning btn-sm">Regresar</a>
     </div>
 
     <div class="card-body bg-light">
-        @include('common.notifications')
         <table class="table table-bordered">
             <thead>
                 <tr class="bg-dark">

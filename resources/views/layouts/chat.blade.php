@@ -3,48 +3,38 @@
       Comentarios
   </div>
   <div class="card-body bg-light">
-    <ul class="media-ist">
-      <li class="media">
-        <div class="media-body">
-          <div class="media">
-            <a href="#" class="float-left">
-              <img class="mr-3 rounded-circle" src="{{asset('img/support.png')}}" width="40" alt="">
-            </a>
-            <div class="media-body">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              <br>
-              <small class="text-muted">Carlos Martin | 23 de Junio de 2018 a las 5:00 pm</small>
+    @include('common.notifications')
+    @include('common.errors')
+    <ul class="media-list">
+      @foreach ($messages as $message)
+        <li class="media">
+          <div class="media-body">
+            <div class="media">
+              <a href="#" class="float-left">
+                <img class="mr-3 rounded-circle" src="{{asset($message->user->image_path)}}" width="40" alt="imagen avatar">
+              </a>
+              <div class="media-body">
+                {{$message->message}}
+                <br>
+                <small class="text-muted">{{$message->user_name}} | {{$message->created_format}}</small>
+              </div>
             </div>
           </div>
-        </div>
-      </li>
-
-      <li class="media">
-        <div class="media-body">
-          <div class="media">
-            <a href="#" class="pull-left">
-              <img class="mr-3 rounded-circle" src="{{asset('img/client.jpg')}}" width="40" alt="">
-            </a>
-            <div class="media-body">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              <br>
-              <small class="text-muted">Carlos Martin | 23 de Junio de 2018 a las 5:00 pm</small>
-            </div>
-          </div>
-        </div>
-      </li>
+        </li>
+      @endforeach
     </ul>
 
   </div>
   <div class="card-footer bg-secondary">
-    <div class="input-group">
-        <input class="form-control" type="text" name="message" value="">
-        <span class="input-group-append">
-          <button class="btn btn-primary btn-sm" type="button" name="button">Enviar</button>
-        </span>
-    </div>
+    <form class="" action="{{route('mensajes.store')}}" method="POST">
+      {{ csrf_field() }}
+      <input type="hidden" name="incident_id" value="{{$bug->id}}">
+      <div class="input-group">
+          <input class="form-control" type="text" name="message" value="{{old('message')}}">
+          <span class="input-group-append">
+            <button class="btn btn-primary btn-sm" type="submit">Enviar</button>
+          </span>
+      </div>
+    </form>
   </div>
-
 </div>

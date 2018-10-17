@@ -33,9 +33,9 @@ class ReportController extends Controller
 
     public function index()
     {
-        $bugs = Bug::all();
+        $incidencias = Bug::all();
 
-        return $bugs;
+        return view('incidents.index',compact('incidencias'));
     }
 
     public function store(Request $request)
@@ -72,7 +72,8 @@ class ReportController extends Controller
     public function show(Bug $incidencia)
     {
         $bug = $incidencia;
-        return view('incidents.show',compact('bug'));
+        $messages =$incidencia->messages;
+        return view('incidents.show',compact('bug','messages'));
     }
 
     public function take(Bug $incidencia)

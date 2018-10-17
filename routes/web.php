@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('proyectos/{proyecto}/seleccionar','ProjectController@select')->name('proyectos.select');
 
+        Route::post('/mensajes','MessageController@store')->name('mensajes.store');
+
         Route::middleware(['admin'])->group(function () {
             Route::resource('/usuarios','UserController')->parameters([
                 'usuarios' => 'usuario'
@@ -57,9 +59,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/proyecto/{proyecto}/niveles','LevelController@getLevelsByProject')->name('proyecto.niveles');
 
             Route::get('/admin','AdminController@index')->name('config');
+
         });
 
     });
 
 });
-

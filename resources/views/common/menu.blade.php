@@ -53,10 +53,10 @@
                     <a href="{{route('login')}}" class="nav-link">Entrar</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Instrucciones</a>
+                    <a href="{{route('register')}}" class="nav-link">Registrarse</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Créditos</a>
+                    <a href="https://github.com/charlymrtn" target="_blank" class="nav-link">Créditos</a>
                 </li>
             @endif
         </ul>
