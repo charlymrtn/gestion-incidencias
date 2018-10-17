@@ -94,7 +94,7 @@ class ProjectController extends Controller
         $user->selected_project_id = $proyecto->id;
         $user->save();
 
-        return back();
+        return redirect()->route('home');
     }
 
 

@@ -87,6 +87,8 @@ class User extends Authenticatable
 
     public function getProjectListAttribute()
     {
+        if($this->is_support) return $this->projects;
+        
         return Project::all();
     }
 
@@ -98,4 +100,9 @@ class User extends Authenticatable
 
         return null;
     }
+
+    public function canTake($bug){
+      return $this->levels->contains('level_id',$bug->level->id);
+    }
+
 }

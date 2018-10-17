@@ -8,7 +8,7 @@
                     <a href="{{route('home')}}"
                     @if(request()->is('home')) class="nav-link active" @else class="nav-link" @endif>Panel Principal</a>
                 </li>
-                @if (!Auth::user()->is_client)
+                @if (Auth::user()->is_admin)
                     <li class="nav-item">
                         <a href="{{route('incidencias.index')}}"
                         @if(request()->is('incidencias.index')) class="nav-link active" @else class="nav-link" @endif>Ver incidencias</a>
@@ -49,11 +49,16 @@
                     </li>
                 @endif
             @else
-                <li class="nav-item"><a href="#" class="nav-link">Bienvenidos</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Instrucciones</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Créditos</a></li>
+                <li class="nav-item">
+                    <a href="{{route('login')}}" class="nav-link">Entrar</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Instrucciones</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Créditos</a>
+                </li>
             @endif
         </ul>
     </div>
 </div>
-

@@ -48,7 +48,7 @@
             <tbody id="panel_not_bugs">
                 @foreach ($not_bugs as $bug)
                     <tr @if($bug->state_id == 2) class="bg-success" @elseif(($bug->state_id == 1)) class="bg-info" @else class="bg-warning" @endif>
-                        <td><a href="{{route('incidencias.show',$bug->id)}}">{{$bug->id}}</a></td>
+                        <td><a href="{{route('incidencias.show',$bug->id)}}">{{$bug->title}}</a></td>
                         <td>{{$bug->category_name}}</td>
                         <td>{{$bug->severity_name}}</td>
                         <td>{{$bug->state}}</td>
@@ -85,7 +85,7 @@
             <tbody id="panel_reported_bugs">
                 @foreach ($reported_bugs as $bug)
                     <tr @if($bug->state_id == 2) class="bg-success" @elseif(($bug->state_id == 1)) class="bg-info" @else class="bg-warning" @endif>
-                        <td><a href="{{route('incidencias.show',$bug->id)}}">{{$bug->id}}</a></td>
+                        <td><a href="{{route('incidencias.show',$bug->id)}}">{{$bug->title}}</a></td>
                         <td>{{$bug->category_name}}</td>
                         <td>{{$bug->severity_name}}</td>
                         <td>{{$bug->state}}</td>

@@ -20,23 +20,16 @@ class ReportController extends Controller
 
     public function create()
     {
-        $proyecto = Project::find(Auth::user()->selected_project_id);
-        if(!$proyecto){
-            $proyecto = ProjectUser::where('user_id',Auth::user()->id)->first();
-            if (!$proyecto){
-                $categories = [];
-                return view('incidents.create',compact('categories'));
-            }else{
-                $categories = Category::where('project_id',$proyecto->project_id)->get();
-                return view('incidents.create',compact('categories'));
-            }
-        }
-
-        $categories = Category::where('project_id',$proyecto->id)->get();
+        $categories = Project::find(Auth::user()->selected_project_id)->categories;
         return view('incidents.create',compact('categories'));
-
-
     }
+
+    public function edit(Bug $incidencia)
+    {
+        $categories = $incidencia->project->categories;
+        return view('incidents.edit',compact('categories','incidencia'));
+    }
+    //
 
     public function index()
     {
@@ -66,6 +59,16 @@ class ReportController extends Controller
         return redirect()->route('home')->with('success','incidencia creada correctamente.');
     }
 
+    public function update(Request $request, Bug $incidencia)
+    {
+
+        $this->validate($request,Bug::$rules,Bug::$messages);
+
+        $incidencia->update($request->all());
+
+        return redirect()->route('incidencias.show',$incidencia->id)->with('success','incidencia editada correctamente.');
+    }
+
     public function show(Bug $incidencia)
     {
         $bug = $incidencia;
@@ -91,11 +94,6 @@ class ReportController extends Controller
             return back()->with('error','usuario sin permisos para esta acción');
 
         }
-    }
-
-    public function edit(Bug $incidencia)
-    {
-        return $incidencia;
     }
 
     public function solve(Bug $incidencia)
@@ -161,8 +159,8 @@ class ReportController extends Controller
             $incidencia->level_id = $next_level_id;
             $incidencia->support_id = null;
 
-            $levels_proj = Nivel::where('project_id',$incidencia->project->id)->orderBy('id', 'asc');
-            if($incidencia->level_id == $levels_proj->last()->id) $incidencia->max_level = 1;
+            $levels_proj = Nivel::where('project_id',$incidencia->project->id)->orderBy('id', 'desc')->first();
+            if($incidencia->level_id == $levels_proj->id) $incidencia->max_level = 1;
 
             $incidencia->save();
             return redirect()->route('home')->with('success','incidencia reasignada al siguiente nivel de atención.');
@@ -175,10 +173,10 @@ class ReportController extends Controller
 
     private function getNextlevelId($level, $levels)
     {
-        if(sizeof($levels) <= 1) return null;
+        if($levels->count() <= 1) return null;
 
         $pos = -1;
-        for ($i=0; $i < sizeof($levels)-1; $i++) {
+        for ($i=0; $i < $levels->count() - 1; $i++) {
             if($levels[$i]->id == $level->id){
                 $pos = $i;
                 break;
